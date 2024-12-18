@@ -1,66 +1,257 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+# Web Architecture Plan: Reminder Calendar with Laravel
 
-## About Laravel
+---
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## **1. Architecture Overview**
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+The application will consist of the following main components:
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+### **Frontend**:
+- User interface for managing reminders (creating, updating, deleting, and viewing).
+- Technologies: Blade Templates, TailwindCSS (or Bootstrap), JavaScript (with AJAX).
 
-## Learning Laravel
+### **Backend**:
+- Laravel framework for handling business logic and APIs.
+- Features: User authentication, appointment management, email reminders.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+### **Database**:
+- MySQL to store user data, reminders, and configurations.
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+### **Email System**:
+- Laravel's built-in **Mailables** for sending reminder emails.
+- Scheduled tasks using Laravel Scheduler to automate email reminders.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+---
 
-## Laravel Sponsors
+## **2. System Architecture Overview**
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+```plaintext
+User Interface (Browser) 
+       |
+       v
+Routes & Controllers (Laravel)
+       |
+       v
+Models <-> Database (Eloquent ORM)
+       |
+       v
+Scheduler <-> Email Service (Mailables)
+```
 
-### Premium Partners
+---
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+## **3. Detailed Planning**
 
-## Contributing
+### **Frontend (Blade Templates + JavaScript)**
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+1. **Page Structure**:
+    - **Home Page**: Introduction to the app with links to the calendar and user authentication.
+    - **Calendar Page**: Displays a list of reminders and a form for creating/editing them.
+    - **Auth Pages**: Login and registration pages.
 
-## Code of Conduct
+2. **Components**:
+    - **Reminder Form**: Inputs for date, title, reminder time (dropdown).
+    - **Reminder List**: Dynamically loaded via AJAX.
+    - **Navigation Bar**: Links for "Home", "Calendar", "Login/Logout".
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+3. **Technologies**:
+    - Blade templates for rendering server-side views.
+    - TailwindCSS/Bootstrap for styling.
+    - JavaScript for interactivity and AJAX.
 
-## Security Vulnerabilities
+---
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+### **Backend (Laravel)**
 
-## License
+1. **Features**:
+    - **Authentication**: User registration, login, and logout using Laravel Breeze or Jetstream.
+    - **Reminder Management**:
+        - CRUD operations for reminders (Create, Read, Update, Delete).
+        - Validations for inputs (e.g., dates in the future, valid email format).
+    - **Email Reminders**:
+        - Scheduled tasks for checking reminders and sending emails.
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+2. **Architecture**:
+    - **Routes**:
+        - `web.php` for web-based routes (Blade views).
+        - `api.php` for AJAX-based endpoints.
+    - **Controllers**:
+        - `AuthController` for user authentication.
+        - `ReminderController` for managing reminders.
+    - **Models**:
+        - `User`: For user data.
+        - `Reminder`: For storing reminders.
+
+---
+
+### **Database Design**
+
+1. **Tables**:
+
+#### `users` Table:
+| Field         | Type        | Description              |
+|---------------|-------------|--------------------------|
+| id            | BIGINT (PK) | User ID                 |
+| name          | VARCHAR(255)| User's full name        |
+| email         | VARCHAR(255)| Unique email address    |
+| password      | VARCHAR(255)| Hashed password         |
+| created_at    | TIMESTAMP   | Created timestamp       |
+| updated_at    | TIMESTAMP   | Last updated timestamp  |
+
+#### `reminders` Table:
+| Field              | Type        | Description                         |
+|--------------------|-------------|-------------------------------------|
+| id                 | BIGINT (PK) | Reminder ID                        |
+| user_id            | BIGINT (FK) | Foreign key to `users` table       |
+| title              | VARCHAR(255)| Reminder title                     |
+| reminder_date      | DATE        | Date of the event                  |
+| reminder_timeframe | ENUM        | "1 day", "2 days", "1 week", etc.  |
+| email              | VARCHAR(255)| Email to send the reminder         |
+| created_at         | TIMESTAMP   | Created timestamp                  |
+| updated_at         | TIMESTAMP   | Last updated timestamp             |
+
+2. **Database Relationships**:
+    - `User` has many `Reminders` (1:n).
+
+---
+
+### **Email System**
+
+1. **Mailable Class**:
+    - Create a `ReminderMailable` class to define the email content.
+    - Customize the subject, body, and formatting.
+
+2. **Scheduler**:
+    - Use Laravel's Task Scheduling to run a script daily to check for reminders and send emails.
+
+**Command for scheduling:**
+```bash
+php artisan make:command SendReminderEmails
+```
+
+**Example Task Logic in the Command:**
+```php
+public function handle()
+{
+    $reminders = Reminder::where('reminder_date', Carbon::today())->get();
+    
+    foreach ($reminders as $reminder) {
+        Mail::to($reminder->email)->send(new ReminderMailable($reminder));
+    }
+}
+```
+
+3. **Register the Task**:
+    - Add the command to `Kernel.php`:
+   ```php
+   protected function schedule(Schedule $schedule)
+   {
+       $schedule->command('reminders:send')->daily();
+   }
+   ```
+
+---
+
+### **API Endpoints**
+
+#### **Reminder Management**:
+1. **Get All Reminders**:
+    - **URL**: `/api/reminders`
+    - **Method**: `GET`
+    - **Response**:
+      ```json
+      [
+        {
+          "id": 1,
+          "title": "Anniversary",
+          "reminder_date": "2024-12-25",
+          "reminder_timeframe": "1 week"
+        }
+      ]
+      ```
+
+2. **Create Reminder**:
+    - **URL**: `/api/reminders`
+    - **Method**: `POST`
+    - **Request**:
+      ```json
+      {
+        "title": "Anniversary",
+        "reminder_date": "2024-12-25",
+        "reminder_timeframe": "1 week"
+      }
+      ```
+    - **Response**:
+      ```json
+      { "message": "Reminder created successfully!" }
+      ```
+
+3. **Delete Reminder**:
+    - **URL**: `/api/reminders/{id}`
+    - **Method**: `DELETE`
+    - **Response**:
+      ```json
+      { "message": "Reminder deleted successfully!" }
+      ```
+
+---
+
+### **Project File Structure**
+
+```plaintext
+reminder-app/
+├── app/
+│   ├── Console/Commands/SendReminderEmails.php  # Scheduler Command
+│   ├── Http/
+│   │   ├── Controllers/
+│   │   │   ├── ReminderController.php          # Reminder logic
+│   │   │   └── AuthController.php              # Auth logic
+│   │   ├── Middleware/
+│   │   └── Requests/
+│   ├── Models/
+│   │   ├── User.php                            # User model
+│   │   └── Reminder.php                        # Reminder model
+│   ├── Mail/
+│   │   └── ReminderMailable.php                # Email template logic
+├── config/
+│   ├── app.php
+│   ├── mail.php                                # Email configuration
+├── database/
+│   ├── migrations/
+│   │   ├── 2024_01_01_000000_create_users_table.php
+│   │   └── 2024_01_01_000001_create_reminders_table.php
+│   ├── seeders/
+├── resources/
+│   ├── views/
+│   │   ├── auth/
+│   │   │   ├── login.blade.php
+│   │   │   └── register.blade.php
+│   │   └── calendar.blade.php
+├── routes/
+│   ├── web.php                                 # Web routes
+│   ├── api.php                                 # API routes
+├── public/
+│   ├── css/
+│   ├── js/
+└── tests/                                      # Test cases
+```
+
+---
+
+### **Deployment Plan**
+
+1. **Local Development**:
+    - Set up Laravel with `composer create-project laravel/laravel`.
+    - Create `.env` for database and email credentials.
+    - Run migrations with `php artisan migrate`.
+
+2. **Deployment**:
+    - Use a cloud provider (e.g., AWS, DigitalOcean, Laravel Forge).
+    - Set up a web server with PHP, MySQL, and SSL.
+    - Deploy the app and configure `cron` for scheduling.
+
+---
+
+### **Next Steps**
+Would you like a sample implementation for one of the components (e.g., migration, controller, or email)?
