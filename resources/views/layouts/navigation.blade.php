@@ -1,12 +1,10 @@
 <nav class="container p-4 flex justify-between items-center">
-    <h1 class="uppercase text-2xl">
+    <h1 class="uppercase text-xl flex justify-center items-center">
         <a href="{{route("home")}}">
-        Reminder Calendar
+            <x-logo/> Reminder Calendar
         </a>
     </h1>
     <ul class="flex justify-center items-center gap-2 md:gap-5">
-
-
         @auth
             <p>Welcome, {{ Auth::user()->name }}!</p>
             <form method="POST" action="{{ route('logout') }}">
@@ -18,6 +16,7 @@
         @endauth
         @guest
             <a href="{{route("login")}}">Login</a>
-            @endguest
+        @endguest
+
     </ul>
 </nav>
