@@ -46,7 +46,7 @@
                                             </th>
                                         </tr>
                                     </thead>
-                                    <x-appointemt appointment_date="01.01." title="Hohzeitstag" reminder_time="1 Tage"></x-appointemt>
+                                    <x-appointment appointment_date="01.01." title="Hohzeitstag" reminder_time="1 Tage"></x-appointment>
                                 </table>
                             </div>
                         </section>
