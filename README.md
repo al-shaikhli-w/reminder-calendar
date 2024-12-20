@@ -1,5 +1,6 @@
 
 # Web Architecture Plan: Reminder Calendar with Laravel
+[![Laravel Forge Site Deployment Status](https://img.shields.io/endpoint?url=https%3A%2F%2Fforge.laravel.com%2Fsite-badges%2F111e8296-f885-4bdf-b11c-df7e07cd6c4e%3Fdate%3D1%26label%3D1%26commit%3D1&style=plastic)](https://forge.laravel.com/servers/869973/sites/2564905)
 
 ---
 
@@ -100,16 +101,16 @@ Scheduler <-> Email Service (Mailables)
 | updated_at    | TIMESTAMP   | Last updated timestamp  |
 
 #### `reminders` Table:
-| Field              | Type        | Description                         |
-|--------------------|-------------|-------------------------------------|
-| id                 | BIGINT (PK) | Reminder ID                        |
-| user_id            | BIGINT (FK) | Foreign key to `users` table       |
-| title              | VARCHAR(255)| Reminder title                     |
-| reminder_date      | DATE        | Date of the event                  |
-| reminder_timeframe | ENUM        | "1 day", "2 days", "1 week", etc.  |
-| email              | VARCHAR(255)| Email to send the reminder         |
-| created_at         | TIMESTAMP   | Created timestamp                  |
-| updated_at         | TIMESTAMP   | Last updated timestamp             |
+| Field          | Type        | Description                         |
+|----------------|-------------|-------------------------------------|
+| id             | BIGINT (PK) | Reminder ID                        |
+| user_id        | BIGINT (FK) | Foreign key to `users` table       |
+| title          | VARCHAR(255)| Reminder title                     |
+| appointment_date    | DATE        | Date of the event                  |
+| reminder_time  | ENUM        | "1 day", "2 days", "1 week", etc.  |
+| email          | VARCHAR(255)| Email to send the reminder         |
+| created_at     | TIMESTAMP   | Created timestamp                  |
+| updated_at     | TIMESTAMP   | Last updated timestamp             |
 
 2. **Database Relationships**:
     - `User` has many `Reminders` (1:n).
