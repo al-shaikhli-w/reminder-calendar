@@ -29,8 +29,6 @@
                                                 Aktion
                                             </th>
                                         </tr>
-
-
                                 @foreach($appointments as $appointment)
                                     <x-appointment
                                         appointment_date="{{$appointment->appointment_date}}"
@@ -44,12 +42,12 @@
                             @else
                                 <h4>Sie haben keine Daten. Bitte fügen Sie ein Erinnerungsdatum hinzu</h4>
                             @endif
-
                         </section>
                     </div>
                 </div>
             @endauth
             @guest
+{{--                TODO impement the design on the screen --}}
                 <p>You are a guest. Please log in or register.</p>
             @endguest
         </div>
