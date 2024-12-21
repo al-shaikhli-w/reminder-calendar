@@ -14,7 +14,6 @@ window.addEventListener('load', function () {
                         modal.classList.add('hidden');
                     })
                 })
-
             })
     }
 })

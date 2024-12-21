@@ -11,9 +11,6 @@
                 <x-primary-button onclick="event.preventDefault(); this.closest('form').submit();">
                     {{ __('Log Out') }}
                 </x-primary-button>
-{{--                <button onclick="event.preventDefault(); this.closest('form').submit();">--}}
-{{--                   --}}
-{{--                </button>--}}
             </form>
         @endauth
         @guest

@@ -9,10 +9,10 @@ class ReminderMail extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public $title;
-    public $appointment_date;
-    public $reminder_time;
-    public $user_email;
+    public string $title;
+    public string $appointment_date;
+    public string $reminder_time;
+    public string $user_email;
 
     public function __construct($title, $appointment_date, $reminder_time, $user_email)
     {

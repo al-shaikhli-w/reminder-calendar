@@ -30,7 +30,6 @@
                         <span class="sr-only">Close modal</span>
                     </button>
                 </div>
-                <!-- Modal body -->
                 <form id="appointment-form" class="flex justify-between flex-col mt-6 gap-4 p-6" method="POST"
                       action="/edit-appointment/{{$current_appointment}}" method="POST">
                     @csrf
@@ -39,40 +38,42 @@
                     <input type="hidden" name="user_id" value="{{Auth::user()->id}}">
                     <div class="flex-1">
                         <label for="appointment_date" class="mb-4 font-bold inline-flex">Datum
-                        <input type="date"
-                               class=" bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-1.5"
-                               id="appointment_date" name="appointment_date"
-                               value="{{ $appointment_date }}" min="{{  $date_now->toDateString()}}"
-                               max="2030-12-31" required/>
+                            <input type="date"
+                                   class=" bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-1.5"
+                                   id="appointment_date" name="appointment_date"
+                                   value="{{ $appointment_date }}" min="{{  $date_now->toDateString()}}"
+                                   max="2030-12-31" required/>
                         </label>
                     </div>
                     <div class="flex-1">
                         <label for="title" class="mb-4 font-bold inline-flex">
                             Bezeichnung
-                        <input type="text" name="title" required minlength="4" maxlength="50" size="55"
-                               placeholder="Bezeichnung"
-                               value="{{$title}}"
-                               class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-1.5">
+                            <input type="text" name="title" required minlength="4" maxlength="50" size="55"
+                                   placeholder="Bezeichnung"
+                                   value="{{$title}}"
+                                   class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-1.5">
 
                         </label>
                     </div>
                     <div class="flex-1">
                         <label for="reminder_time" class="mb-4 font-bold inline-flex">Erinnerung {{$reminder_time}}
-                        <select name="reminder_time" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2">
-                            <option disabled selected>-- bitte auswählen --</option>
-                            @php
-                                $options = [
-                                    1 => '1 Tag',
-                                    2 => '2 Tage',
-                                    4 => '4 Tage',
-                                    7 => '1 Woche',
-                                    14 => '2 Wochen'
-                                ];
-                            @endphp
-                            @foreach($options as $value => $label)
-                                <option value="{{ $value }}" {{ $reminder_time == $value ? 'selected' : '' }}>{{ $label }}</option>
-                            @endforeach
-                        </select>
+                            <select name="reminder_time"
+                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2">
+                                <option disabled selected>-- bitte auswählen --</option>
+                                @php
+                                    $options = [
+                                        1 => '1 Tag',
+                                        2 => '2 Tage',
+                                        4 => '4 Tage',
+                                        7 => '1 Woche',
+                                        14 => '2 Wochen'
+                                    ];
+                                @endphp
+                                @foreach($options as $value => $label)
+                                    <option
+                                        value="{{ $value }}" {{ $reminder_time == $value ? 'selected' : '' }}>{{ $label }}</option>
+                                @endforeach
+                            </select>
                         </label>
                     </div>
                     <x-primary-button class="mt-9 inline-flex justify-center items-center bg-red-600">

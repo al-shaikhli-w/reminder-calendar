@@ -29,7 +29,7 @@
         <x-input-label for="reminder_time">
             Erinnerung
             <select name="reminder_time" id="reminder_time" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2" required>
-                <option disabled selected>-- bitte auswählen --</option>
+                <option disabled selected>-- bitte Auswählen --</option>
                 <option value="1">1 Tag</option>
                 <option value="2">2 Tage</option>
                 <option value="4">4 Tage</option>

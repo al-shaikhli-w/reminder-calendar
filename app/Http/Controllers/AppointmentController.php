@@ -25,8 +25,6 @@ class AppointmentController extends Controller
         $validatedFields = $this->validateAndSanitize($request);
         $validatedFields['user_id'] = auth()->id();
         Appointment::create($validatedFields);
-
-        // Calculate the delay for kfadsthe rejgfdlkminder email
         $appointmentDate = Carbon::parse($validatedFields['appointment_date']);
         $reminderTime = (int) $validatedFields['reminder_time'];
         $reminderDate = $appointmentDate->subDays($reminderTime);
