@@ -1,4 +1,4 @@
-<nav class="container py-6 flex justify-between items-center">
+<nav class="max-w-7xl mx-auto sm:px-6 lg:px-8 py-6 flex justify-between items-center">
     <h1 class="uppercase text-xl flex justify-center items-center">
         <a href="{{route("home")}}">
             <x-logo/> Reminder Calendar

@@ -3,6 +3,7 @@
 use App\Http\Controllers\AppointmentController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Auth\RegisteredUserController;
+use App\Http\Controllers\ReminderController;
 use App\Models\Appointment;
 use Illuminate\Support\Facades\Route;
 
@@ -28,5 +29,9 @@ Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])->name(
 
 // appointment
 Route::post('/create-appointment', [AppointmentController::class, 'createAppointment']);
-Route::patch('/edit-appointment/{appointment}', [AppointmentController::class, 'editAppointment']);
+Route::put('/edit-appointment/{appointment}', [AppointmentController::class, 'updateAppointment']);
+Route::delete('/delete-appointment/{appointment}', [AppointmentController::class, 'deleteAppointment']);
 
+
+// Test email
+Route::get('/send-reminder', [ReminderController::class, 'sendReminder']);
