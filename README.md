@@ -9,15 +9,15 @@
 The application will consist of the following main components:
 
 ### **Frontend**:
-- User interface for managing reminders (creating, updating, deleting, and viewing).
-- Technologies: Blade Templates, TailwindCSS (or Bootstrap), JavaScript (with AJAX).
+- User interface for managing reminders (creating, updating, deleting, and viewing) Reminder Calendar.
+- Technologies: Blade Templates, TailwindCSS and custom components, JavaScript (with AJAX).
 
 ### **Backend**:
 - Laravel framework for handling business logic and APIs.
 - Features: User authentication, appointment management, email reminders.
 
 ### **Database**:
-- MySQL to store user data, reminders, and configurations.
+- MySQL to store user data, reminders date, and configurations.
 
 ### **Email System**:
 - Laravel's built-in **Mailables** for sending reminder emails.
@@ -47,18 +47,35 @@ Scheduler <-> Email Service (Mailables)
 ### **Frontend (Blade Templates + JavaScript)**
 
 1. **Page Structure**:
-    - **Home Page**: Introduction to the app with links to the calendar and user authentication.
-    - **Calendar Page**: Displays a list of reminders and a form for creating/editing them.
-    - **Auth Pages**: Login and registration pages.
+    - **Login Page**: Form for user login.
+    - **Registration Page**: Form for user registration.
+    - **Home Page**: Main page with reminders form to add new reminders or edit them and display all your reminders. 
 
-2. **Components**:
+2. **Authentication**:
+    - **Login**: Form for user login with email and password.
+    - **Registration**: Form for user registration with name, email, and password.
+
+3. **Components**:
     - **Reminder Form**: Inputs for date, title, reminder time (dropdown).
     - **Reminder List**: Dynamically loaded via AJAX.
-    - **Navigation Bar**: Links for "Home", "Calendar", "Login/Logout".
+    - **Navigation Bar**: Links for "Login/Logout".
+    - **appointment Component**: Display the appointment date and time and the title.
+    - **appointment Modal**: Display the appointment details in a modal when the user try to edit theme.
+    - **text-input Component**: Display the input field.
+    - **input-error Component**: Display the error message.
+    - **button Component**: Display the button.
+    - **Logo Component**: Display the logout logo.
+4. **layouts**:
+    - **app.blade.php**: Main layout file with navigation bar.
+    - **guest.blade.php**: Layout for guest users.
+    - **auth.blade.php**: Layout for authenticated users.
+5. **mails**:
+    - **mail-send.blade.php**: Email template for reminder notifications.
+    - **send-test-mail.blade.php**: Email template for testing email functionality.
 
-3. **Technologies**:
+6. **Technologies**:
     - Blade templates for rendering server-side views.
-    - TailwindCSS/Bootstrap for styling.
+    - TailwindCSS for styling.
     - JavaScript for interactivity and AJAX.
 
 ---
@@ -66,12 +83,12 @@ Scheduler <-> Email Service (Mailables)
 ### **Backend (Laravel)**
 
 1. **Features**:
-    - **Authentication**: User registration, login, and logout using Laravel Breeze or Jetstream.
+    - **Authentication**: User registration, login, and logout using Laravel.
     - **Reminder Management**:
         - CRUD operations for reminders (Create, Read, Update, Delete).
         - Validations for inputs (e.g., dates in the future, valid email format).
     - **Email Reminders**:
-        - Scheduled tasks for checking reminders and sending emails.
+        - Scheduled tasks for checking reminders and sending emails with job task.
 
 2. **Architecture**:
     - **Routes**:
@@ -82,7 +99,9 @@ Scheduler <-> Email Service (Mailables)
         - `ReminderController` for managing reminders.
     - **Models**:
         - `User`: For user data.
-        - `Reminder`: For storing reminders.
+        - `Appointment`: For Store the Appointment.
+    - **jobs**:
+        - `SendReminderEmails`: For sending reminder emails.
 
 ---
 
@@ -100,7 +119,7 @@ Scheduler <-> Email Service (Mailables)
 | created_at    | TIMESTAMP   | Created timestamp       |
 | updated_at    | TIMESTAMP   | Last updated timestamp  |
 
-#### `reminders` Table:
+#### `appointment` Table:
 | Field          | Type        | Description                         |
 |----------------|-------------|-------------------------------------|
 | id             | BIGINT (PK) | Reminder ID                        |
@@ -113,18 +132,18 @@ Scheduler <-> Email Service (Mailables)
 | updated_at     | TIMESTAMP   | Last updated timestamp             |
 
 2. **Database Relationships**:
-    - `User` has many `Reminders` (1:n).
+    - `User` has many `appointment` (1:n).
 
 ---
 
 ### **Email System**
 
 1. **Mailable Class**:
-    - Create a `ReminderMailable` class to define the email content.
+    - Create a `MailSend` class to define the email content to remind the user about the Appointment.
     - Customize the subject, body, and formatting.
 
 2. **Scheduler**:
-    - Use Laravel's Task Scheduling to run a script daily to check for reminders and send emails.
+    - Use Laravel's Task (Jobs) Scheduling to run a script daily to check for reminders and send emails.
 
 **Command for scheduling:**
 ```bash
@@ -143,99 +162,54 @@ public function handle()
 }
 ```
 
-3. **Register the Task**:
-    - Add the command to `Kernel.php`:
-   ```php
-   protected function schedule(Schedule $schedule)
-   {
-       $schedule->command('reminders:send')->daily();
-   }
-   ```
-
----
-
-### **API Endpoints**
-
-#### **Reminder Management**:
-1. **Get All Reminders**:
-    - **URL**: `/api/reminders`
-    - **Method**: `GET`
-    - **Response**:
-      ```json
-      [
-        {
-          "id": 1,
-          "title": "Anniversary",
-          "reminder_date": "2024-12-25",
-          "reminder_timeframe": "1 week"
-        }
-      ]
-      ```
-
-2. **Create Reminder**:
-    - **URL**: `/api/reminders`
-    - **Method**: `POST`
-    - **Request**:
-      ```json
-      {
-        "title": "Anniversary",
-        "reminder_date": "2024-12-25",
-        "reminder_timeframe": "1 week"
-      }
-      ```
-    - **Response**:
-      ```json
-      { "message": "Reminder created successfully!" }
-      ```
-
-3. **Delete Reminder**:
-    - **URL**: `/api/reminders/{id}`
-    - **Method**: `DELETE`
-    - **Response**:
-      ```json
-      { "message": "Reminder deleted successfully!" }
-      ```
 
 ---
 
 ### **Project File Structure**
 
 ```plaintext
-reminder-app/
+reminder-calendar/
 ├── app/
-│   ├── Console/Commands/SendReminderEmails.php  # Scheduler Command
+│   ├── Console/
+│   │   └── Commands/
+│   │       └── SendReminderEmails.php  # Scheduler Command
 │   ├── Http/
 │   │   ├── Controllers/
-│   │   │   ├── ReminderController.php          # Reminder logic
-│   │   │   └── AuthController.php              # Auth logic
+│   │   │   ├── AppointmentController.php  # Appointment logic
+│   │   │   └── AuthController.php         # Auth logic
 │   │   ├── Middleware/
 │   │   └── Requests/
-│   ├── Models/
-│   │   ├── User.php                            # User model
-│   │   └── Reminder.php                        # Reminder model
+│   ├── Jobs/
+│   │   └── SendReminderEmail.php          # Job for sending reminder emails
 │   ├── Mail/
-│   │   └── ReminderMailable.php                # Email template logic
+│   │   └── ReminderMail.php               # Email template logic
+│   ├── Models/
+│   │   ├── Appointment.php                # Appointment model
+│   │   └── User.php                       # User model
 ├── config/
 │   ├── app.php
-│   ├── mail.php                                # Email configuration
+│   ├── mail.php                           # Email configuration
 ├── database/
 │   ├── migrations/
 │   │   ├── 2024_01_01_000000_create_users_table.php
-│   │   └── 2024_01_01_000001_create_reminders_table.php
+│   │   └── 2024_01_01_000001_create_appointments_table.php
 │   ├── seeders/
 ├── resources/
 │   ├── views/
 │   │   ├── auth/
 │   │   │   ├── login.blade.php
 │   │   │   └── register.blade.php
+│   │   ├── mail/
+│   │   │   ├── mail-send.blade.php
+│   │   │   └── send-test-mail.blade.php
 │   │   └── calendar.blade.php
 ├── routes/
-│   ├── web.php                                 # Web routes
-│   ├── api.php                                 # API routes
+│   ├── web.php                             # Web routes
+│   ├── api.php                             # API routes
 ├── public/
 │   ├── css/
 │   ├── js/
-└── tests/                                      # Test cases
+└── tests/                                  # Test cases
 ```
 
 ---
@@ -253,6 +227,3 @@ reminder-app/
     - Deploy the app and configure `cron` for scheduling.
 
 ---
-
-### **Next Steps**
-Would you like a sample implementation for one of the components (e.g., migration, controller, or email)?
