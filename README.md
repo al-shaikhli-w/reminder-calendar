@@ -1,7 +1,5 @@
-
 # Web Architecture Plan: Reminder Calendar with Laravel
 
----
 
 ## **1. Architecture Overview**
 
