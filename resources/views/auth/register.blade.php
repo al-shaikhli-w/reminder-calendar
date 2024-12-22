@@ -8,13 +8,13 @@
                 <x-input-error :messages="$errors->get('name')" class="mt-2" />
             </div>
             <div class="mt-4">
-                <x-input-label for="email" :value="__('Email')" />
+                <x-input-label for="email" :value="__('E-Mail')" />
                 <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autocomplete="username" />
                 <x-input-error :messages="$errors->get('email')" class="mt-2" />
             </div>
 
             <div class="mt-4">
-                <x-input-label for="password" :value="__('Password')" />
+                <x-input-label for="password" :value="__('Passwort')" />
 
                 <x-text-input id="password" class="block mt-1 w-full"
                                 type="password"
@@ -25,7 +25,7 @@
             </div>
 
             <div class="mt-4">
-                <x-input-label for="password_confirmation" :value="__('Confirm Password')" />
+                <x-input-label for="password_confirmation" :value="__('Passwort bestätigen')" />
 
                 <x-text-input id="password_confirmation" class="block mt-1 w-full"
                                 type="password"
@@ -40,7 +40,7 @@
                 </a>
 
                 <x-primary-button class="ms-4">
-                    {{ __('Register') }}
+                    {{ __('Registrieren') }}
                 </x-primary-button>
             </div>
         </form>

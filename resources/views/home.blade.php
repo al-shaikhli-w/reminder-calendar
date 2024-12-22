@@ -40,55 +40,42 @@
             @endauth
             @guest
                 <section class="guest mt-6">
-                    <h2 class="text-2xl mb-3 font-bold">What is Reminder Calendar?</h2>
-                    <p>Life is busy, and it’s easy to forget the little things. <strong>Reminder Calendar</strong> is
-                        here to help! Whether it’s a meeting, a birthday, or just a task you can’t afford to forget, our
-                        app creates a personalized reminder calendar tailored to your needs. We’ll even send you timely
-                        reminder emails to ensure you’re always on track.</p>
+                    <h2 class="text-2xl mb-3 font-bold">Was ist Reminder Calendar?</h2>
+                    <p>Das Leben ist hektisch und es ist leicht, die kleinen Dinge zu vergessen. <strong>Reminder Calendar</strong> ist hier, um zu helfen! Ob es sich um ein Meeting, einen Geburtstag oder einfach nur um eine Aufgabe handelt, die Sie nicht vergessen dürfen, unsere App erstellt einen personalisierten Erinnerungskalender, der auf Ihre Bedürfnisse zugeschnitten ist. Wir senden Ihnen sogar rechtzeitige Erinnerungs-E-Mails, um sicherzustellen, dass Sie immer auf dem Laufenden sind.</p>
 
-                    <h2 class="text-2xl mb-3 mt-6 font-bold">Why Choose Reminder Calendar?</h2>
+                    <h2 class="text-2xl mb-3 mt-6 font-bold">Warum Reminder Calendar wählen?</h2>
                     <ul>
-                        <li><strong>🕒 Custom Reminders:</strong> Set reminders for any event or task, at any time that
-                            suits you.
+                        <li><strong>🕒 Individuelle Erinnerungen:</strong> Legen Sie Erinnerungen für jedes Ereignis oder jede Aufgabe fest, zu jeder Zeit, die Ihnen passt.
                         </li>
-                        <li><strong>📧 Email Notifications:</strong> Receive friendly reminder emails exactly when you
-                            need them.
+                        <li><strong>📧 E-Mail-Benachrichtigungen:</strong> Erhalten Sie freundliche Erinnerungs-E-Mails genau dann, wenn Sie sie benötigen.
                         </li>
-                        <li><strong>📅 Simple & Intuitive:</strong> Easily manage your reminders with a clean,
-                            user-friendly interface.
+                        <li><strong>📅 Einfach & Intuitiv:</strong> Verwalten Sie Ihre Erinnerungen ganz einfach mit einer sauberen, benutzerfreundlichen Oberfläche.
                         </li>
-                        <li><strong>🔒 Secure & Private:</strong> Your data is safe with us. We prioritize your privacy
-                            and security.
+                        <li><strong>🔒 Sicher & Privat:</strong> Ihre Daten sind bei uns sicher. Wir legen großen Wert auf Ihre Privatsphäre und Sicherheit.
                         </li>
                     </ul>
 
-                    <h2 class="text-2xl mb-3 mt-6 font-bold">How It Works</h2>
+                    <h2 class="text-2xl mb-3 mt-6 font-bold">Wie es funktioniert</h2>
                     <ol>
-                        <li><strong>Create Your Reminder:</strong> Pick a date, time, and add a description for your
-                            task or event.
+                        <li><strong>Erstellen Sie Ihre Erinnerung:</strong> Wählen Sie ein Datum, eine Uhrzeit und fügen Sie eine Beschreibung für Ihre Aufgabe oder Ihr Ereignis hinzu.
                         </li>
-                        <li><strong>Customize Your Notification:</strong> Set when and how often you’d like to be
-                            reminded.
+                        <li><strong>Passen Sie Ihre Benachrichtigung an:</strong> Legen Sie fest, wann und wie oft Sie erinnert werden möchten.
                         </li>
-                        <li><strong>Sit Back & Relax:</strong> We’ll send you an email reminder so you’ll never miss a
-                            thing.
+                        <li><strong>Lehnen Sie sich zurück & entspannen Sie sich:</strong> Wir senden Ihnen eine E-Mail-Erinnerung, damit Sie nichts verpassen.
                         </li>
                     </ol>
 
-                    <h2 class="text-2xl mb-3 mt-6 font-bold">Who Is It For?</h2>
+                    <h2 class="text-2xl mb-3 mt-6 font-bold">Für wen ist es?</h2>
                     <ul class="list-item">
-                        <li>- Busy professionals</li>
-                        <li>- Students managing deadlines</li>
-                        <li>- Families planning events</li>
-                        <li>- Anyone who values organization and punctuality</li>
+                        <li>- Berufstätige</li>
+                        <li>- Studenten, die Fristen verwalten</li>
+                        <li>- Familien, die Veranstaltungen planen</li>
+                        <li>- Jeder, der Wert auf Organisation und Pünktlichkeit legt</li>
                     </ul>
 
                     <div class="cta">
-                        <p class="mb-6 mt-3">Don’t let important moments slip through the cracks. Join thousands of
-                            users who trust <strong>Reminder Calendar</strong> to keep them organized.</p>
-                        <a href="{{route("register")}}"
-                           class="cursor-pointer inline-flex items-center px-4 py-2 bg-gray-800 border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150">Sign
-                            Up Now For free!</a>
+                        <p class="mb-6 mt-3">Lassen Sie wichtige Momente nicht durch die Lappen gehen. Schließen Sie sich Tausenden von Nutzern an, die <strong>Reminder Calendar</strong> vertrauen, um organisiert zu bleiben.</p>
+                        <a href="{{route("register")}}" class="cursor-pointer inline-flex items-center px-4 py-2 bg-gray-800 border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-gray-700 focus:bg-gray-700 active:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition ease-in-out duration-150">Jetzt kostenlos anmelden!</a>
                     </div>
                 </section>
             @endguest
