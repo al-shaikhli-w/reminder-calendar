@@ -1,6 +1,5 @@
 
 # Web Architecture Plan: Reminder Calendar with Laravel
-[![Laravel Forge Site Deployment Status](https://img.shields.io/endpoint?url=https%3A%2F%2Fforge.laravel.com%2Fsite-badges%2F111e8296-f885-4bdf-b11c-df7e07cd6c4e%3Fdate%3D1%26label%3D1%26commit%3D1&style=plastic)](https://forge.laravel.com/servers/869973/sites/2564905)
 
 ---
 
