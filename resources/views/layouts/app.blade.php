@@ -11,7 +11,7 @@
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
     <body class="font-sans antialiased">
-        <div class="min-h-screen bg-gray-100">
+        <section class="min-h-screen bg-gray-100 px-2">
             @include('layouts.navigation')
             @isset($header)
                 <header class="bg-white shadow">
@@ -23,6 +23,6 @@
             <main>
                 {{ $slot }}
             </main>
-        </div>
+        </section>
     </body>
 </html>
