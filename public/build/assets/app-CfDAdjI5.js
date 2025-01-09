@@ -1,0 +1,1 @@
+window.addEventListener("load",function(){let t=document.querySelectorAll(".editButton");t&&t.forEach(d=>{d.addEventListener("click",o=>{const n=o.target.id,e=o.target.parentElement.querySelector(`section .${n}`);e.classList.remove("hidden"),e.querySelector(".close-modal").addEventListener("click",function(){e.classList.add("hidden")})})})});
